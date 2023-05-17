@@ -16,7 +16,7 @@ import { toast } from "react-toastify"
 import Logo from "@/components/ui/Logo"
 
 
-export default function admin() {
+export default function Admin() {
   const {signIn, admin, isAdminAuth} = useContext(AuthAdminContext)
   const [passwordShown, setPasswordShown] = useState<boolean>(false)
   const [email, setEmail] = useState('');

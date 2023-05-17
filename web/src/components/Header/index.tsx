@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-
+import Link from 'next/link';
 import Logo from '../ui/Logo';
 import {FiMenu} from 'react-icons/fi'
 import {BsArrowRightShort} from 'react-icons/bs'
@@ -67,7 +67,7 @@ interface NavLinkProps extends React.HTMLProps<HTMLLinkElement> {
 
 function NavLink({ children, className, currentPath,fn, href, icon}: NavLinkProps) {
   return (
-    <a
+    <Link
       className={`
          flex flex-row whitespace-nowrap px-3 py-2 text-sm font-semibold no-underline transition hover:text-slate-900
         ${
@@ -83,7 +83,7 @@ function NavLink({ children, className, currentPath,fn, href, icon}: NavLinkProp
     >
       {children}
       {icon && (React.createElement(icon, { size: "20" }))}
-    </a>
+    </Link>
     
   );
 }
@@ -197,9 +197,9 @@ interface HeaderProps {
 export function Header({ navLinks = links }: HeaderProps) {
   return (
     <header className="container bg-gray-50 mx-auto flex w-full items-center justify-between py-4 px-6">
-      <a href="/">
+      <Link href="/">
         <Logo className="w-28"/>
-      </a>
+      </Link>
       <Navigation navLinks={navLinks} />
       <Navigation mobile navLinks={navLinks} />
     </header>

@@ -27,7 +27,7 @@ interface HomeProps {
   userList: UsersProps[];
 }
 
-export default function modificar({ userList }: HomeProps) {
+export default function Modificar({ userList }: HomeProps) {
   const [potencia, setPotencia] = useState(0);
   const [custo, setCusto] = useState('');
 

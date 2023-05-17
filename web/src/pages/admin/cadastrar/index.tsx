@@ -16,7 +16,7 @@ import { AuthAdminContext } from "@/contexts/AdminContext";
 
 
 
-export default function alterar() {
+export default function Cadastrar() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [comissao, setComissao] = useState('');

@@ -26,7 +26,7 @@ interface HomeProps {
   userList: UsersProps[];
 }
 
-export default function modificar({ userList }: HomeProps) {
+export default function Modificar({ userList }: HomeProps) {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [comissao, setComissao] = useState('');

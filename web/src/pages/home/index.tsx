@@ -4,8 +4,7 @@ import Head from "next/head"
 import { Header } from "@/components/Header"
 
 import { canSSRAuth } from "@/utils/canSSRAuth";
-
-
+import Link from "next/link";
 
 export default function Home() {
   
@@ -26,10 +25,10 @@ export default function Home() {
               
                         <ul className="flex flex-col mt-4 font-medium ">
                             <li>
-                                <a href="/home" className="block py-2 pr-4 pl-3 text-white lg:text-gray-700 rounded bg-primary-700 lg:bg-white hover:text-primary-700 border-b border-gray-100 hover:bg-gray-100" aria-current="page">Página Inicial</a>
+                                <Link href="/home" className="block py-2 pr-4 pl-3 text-white lg:text-gray-700 rounded bg-primary-700 lg:bg-white hover:text-primary-700 border-b border-gray-100 hover:bg-gray-100" aria-current="page">Página Inicial</Link>
                             </li>
                             <li>
-                                <a href="/calculadora" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-primary-700 hover:bg-gray-100 ">Calculadora</a>
+                                <Link href="/calculadora" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-primary-700 hover:bg-gray-100 ">Calculadora</Link>
                             </li>                            
                             {/* <li>
                                 <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-primary-700 hover:bg-gray-100  ">Preciso de Ajuda</a>
