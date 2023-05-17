@@ -6,8 +6,10 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL")
+  directUrl         = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
 }
 
 // Define a tabela de admin
@@ -28,13 +30,13 @@ model Vendedor {
 }
 
 model PotenciaPlacas {
-  id      Int @id @default(1)
-  potencia   Int 
+  id       Int @id @default(1)
+  potencia Int
 }
 
 model CustoPorKWH {
-  id            Int   @id @default(autoincrement())
-  faixaInicial  Int
-  faixaFinal    Int
-  valorCusto    String
+  id           Int    @id @default(autoincrement())
+  faixaInicial Int
+  faixaFinal   Int
+  valorCusto   String
 }
