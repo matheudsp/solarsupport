@@ -24,7 +24,7 @@ interface HomeProps {
   users: UsersProps[];
 }
 
-export default function painel({ users }: HomeProps) {
+export default function Painel({ users }: HomeProps) {
 
   const [userList, setUserList] = useState(users || []);
 
