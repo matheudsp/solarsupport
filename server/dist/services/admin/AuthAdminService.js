@@ -15,26 +15,6 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var __async = (__this, __arguments, generator) => {
-  return new Promise((resolve, reject) => {
-    var fulfilled = (value) => {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var rejected = (value) => {
-      try {
-        step(generator.throw(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
-    step((generator = generator.apply(__this, __arguments)).next());
-  });
-};
 
 // src/services/admin/AuthAdminService.ts
 var AuthAdminService_exports = {};
@@ -52,38 +32,36 @@ var prisma_default = prismaClient;
 var import_bcryptjs = require("bcryptjs");
 var import_jsonwebtoken = require("jsonwebtoken");
 var AuthAdminService = class {
-  execute(_0) {
-    return __async(this, arguments, function* ({ email, senha }) {
-      const admin = yield prisma_default.admin.findFirst({
-        where: {
-          email
-        }
-      });
-      if (!admin) {
-        throw new Error("Usu\xE1rio/senha incorreta");
+  async execute({ email, senha }) {
+    const admin = await prisma_default.admin.findFirst({
+      where: {
+        email
       }
-      const passwordMatch = yield (0, import_bcryptjs.compare)(senha, admin.senha);
-      if (!passwordMatch) {
-        throw new Error("Usu\xE1rio/senha incorreta");
-      }
-      const token = (0, import_jsonwebtoken.sign)(
-        {
-          nome: admin.nome,
-          email: admin.email
-        },
-        process.env.JWT_SECRET,
-        {
-          subject: admin.id,
-          expiresIn: "30d"
-        }
-      );
-      return {
-        id: admin.id,
-        nome: admin.nome,
-        email: admin.email,
-        token
-      };
     });
+    if (!admin) {
+      throw new Error("Usu\xE1rio/senha incorreta");
+    }
+    const passwordMatch = await (0, import_bcryptjs.compare)(senha, admin.senha);
+    if (!passwordMatch) {
+      throw new Error("Usu\xE1rio/senha incorreta");
+    }
+    const token = (0, import_jsonwebtoken.sign)(
+      {
+        nome: admin.nome,
+        email: admin.email
+      },
+      process.env.JWT_SECRET,
+      {
+        subject: admin.id,
+        expiresIn: "30d"
+      }
+    );
+    return {
+      id: admin.id,
+      nome: admin.nome,
+      email: admin.email,
+      token
+    };
   }
 };
 // Annotate the CommonJS export names for ESM import in node:

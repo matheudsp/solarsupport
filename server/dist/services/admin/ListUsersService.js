@@ -15,26 +15,6 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var __async = (__this, __arguments, generator) => {
-  return new Promise((resolve, reject) => {
-    var fulfilled = (value) => {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var rejected = (value) => {
-      try {
-        step(generator.throw(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
-    step((generator = generator.apply(__this, __arguments)).next());
-  });
-};
 
 // src/services/admin/ListUsersService.ts
 var ListUsersService_exports = {};
@@ -50,18 +30,16 @@ var prisma_default = prismaClient;
 
 // src/services/admin/ListUsersService.ts
 var ListUsersService = class {
-  execute() {
-    return __async(this, null, function* () {
-      const findAll = yield prisma_default.vendedor.findMany({
-        select: {
-          id: true,
-          nome: true,
-          comissao: true,
-          email: true
-        }
-      });
-      return findAll;
+  async execute() {
+    const findAll = await prisma_default.vendedor.findMany({
+      select: {
+        id: true,
+        nome: true,
+        comissao: true,
+        email: true
+      }
     });
+    return findAll;
   }
 };
 // Annotate the CommonJS export names for ESM import in node:

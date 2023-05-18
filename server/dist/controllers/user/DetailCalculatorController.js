@@ -15,26 +15,6 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var __async = (__this, __arguments, generator) => {
-  return new Promise((resolve, reject) => {
-    var fulfilled = (value) => {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var rejected = (value) => {
-      try {
-        step(generator.throw(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
-    step((generator = generator.apply(__this, __arguments)).next());
-  });
-};
 
 // src/controllers/user/DetailCalculatorController.ts
 var DetailCalculatorController_exports = {};
@@ -50,35 +30,31 @@ var prisma_default = prismaClient;
 
 // src/services/user/DetailCalculatorService.ts
 var DetailCalculatorService = class {
-  execute() {
-    return __async(this, null, function* () {
-      const pot = yield prisma_default.potenciaPlacas.findMany({
-        select: {
-          id: true,
-          potencia: true
-        }
-      });
-      const custo = yield prisma_default.custoPorKWH.findMany({
-        select: {
-          id: true,
-          valorCusto: true,
-          faixaInicial: true,
-          faixaFinal: true
-        }
-      });
-      return { pot, custo };
+  async execute() {
+    const pot = await prisma_default.potenciaPlacas.findMany({
+      select: {
+        id: true,
+        potencia: true
+      }
     });
+    const custo = await prisma_default.custoPorKWH.findMany({
+      select: {
+        id: true,
+        valorCusto: true,
+        faixaInicial: true,
+        faixaFinal: true
+      }
+    });
+    return { pot, custo };
   }
 };
 
 // src/controllers/user/DetailCalculatorController.ts
 var DetailCalculatorController = class {
-  handle(req, res) {
-    return __async(this, null, function* () {
-      const detailCalculatorService = new DetailCalculatorService();
-      const info = yield detailCalculatorService.execute();
-      return res.json(info);
-    });
+  async handle(req, res) {
+    const detailCalculatorService = new DetailCalculatorService();
+    const info = await detailCalculatorService.execute();
+    return res.json(info);
   }
 };
 // Annotate the CommonJS export names for ESM import in node:

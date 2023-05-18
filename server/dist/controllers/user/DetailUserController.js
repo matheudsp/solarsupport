@@ -15,26 +15,6 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var __async = (__this, __arguments, generator) => {
-  return new Promise((resolve, reject) => {
-    var fulfilled = (value) => {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var rejected = (value) => {
-      try {
-        step(generator.throw(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
-    step((generator = generator.apply(__this, __arguments)).next());
-  });
-};
 
 // src/controllers/user/DetailUserController.ts
 var DetailUserController_exports = {};
@@ -50,33 +30,29 @@ var prisma_default = prismaClient;
 
 // src/services/user/DetailUserService.ts
 var DetailUserService = class {
-  execute(user_id) {
-    return __async(this, null, function* () {
-      const user = yield prisma_default.vendedor.findFirst({
-        where: {
-          id: user_id
-        },
-        select: {
-          id: true,
-          nome: true,
-          email: true,
-          comissao: true
-        }
-      });
-      return user;
+  async execute(user_id) {
+    const user = await prisma_default.vendedor.findFirst({
+      where: {
+        id: user_id
+      },
+      select: {
+        id: true,
+        nome: true,
+        email: true,
+        comissao: true
+      }
     });
+    return user;
   }
 };
 
 // src/controllers/user/DetailUserController.ts
 var DetailUserController = class {
-  handle(req, res) {
-    return __async(this, null, function* () {
-      const user_id = req.user_id;
-      const detailUserService = new DetailUserService();
-      const user = yield detailUserService.execute(user_id);
-      return res.json(user);
-    });
+  async handle(req, res) {
+    const user_id = req.user_id;
+    const detailUserService = new DetailUserService();
+    const user = await detailUserService.execute(user_id);
+    return res.json(user);
   }
 };
 // Annotate the CommonJS export names for ESM import in node:
