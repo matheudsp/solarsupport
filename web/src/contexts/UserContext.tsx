@@ -36,7 +36,7 @@ type AuthProviderProps = {
 export function signOut(){
   console.log('ueppa')
   try{
-    destroyCookie(null, '@nextauth.token',{path:'/'})
+    destroyCookie(undefined, '@nextauth.token',{path:'/'})
     Router.push('/')
   }catch{
     console.log('erro ao deslogar')
@@ -80,7 +80,7 @@ export function AuthUserProvider({ children }: AuthProviderProps) {
           
           const { id, nome, comissao,token } = response.data;
           
-          setCookie(null, '@nextauth.token', token, {
+          setCookie(undefined, '@nextauth.token', token, {
             maxAge: 60 * 60 * 24 * 30, // Expirar em 1 mes
             path: "/" // Quais caminhos terao acesso ao cookie
           })
