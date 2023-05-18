@@ -12,8 +12,8 @@ export function setupAPIClient( context = undefined){
     
 
     const api = axios.create({
-        baseURL: 'http://localhost:3333',
-        // baseURL: 'http://10.9.136.185:3333',
+        baseURL: 'https://solarsupport.onrender.com/',
+        
         headers: {
             "Content-Type":'application/json',
             Authorization:`Bearer ${cookies['@nextauth.token']}`

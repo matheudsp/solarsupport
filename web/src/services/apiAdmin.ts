@@ -8,7 +8,7 @@ export function setupAPIAdmin( context = undefined){
     let cookies = parseCookies(context);
 
     const api = axios.create({
-        baseURL: 'http://localhost:3333',
+        baseURL: 'https://solarsupport.onrender.com/',
         headers: {
             "Content-Type":'application/json',
             Authorization: `Bearer ${cookies['@nextauth.tokenAdmin']}`
