@@ -1,9 +1,8 @@
 
 import Head from "next/head"
-// import logoImg from '../../public/'
-import { Header } from "@/components/Header"
 
 import { canSSRAuth } from "@/utils/canSSRAuth";
+import { Header } from "@/components/Header";
 import Link from "next/link";
 
 export default function Home() {
@@ -14,8 +13,9 @@ export default function Home() {
       <Head>
         <title>Solar Support - Solução completa em geradores fotovoltaicos</title>
       </Head>
-      <Header />
+      
       <section className="bg-gray-300 w-full h-screen">
+      <Header />
         
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto ">
           <div className="w-full bg-white rounded-lg shadow sm:max-w-md xl:p-0">
@@ -30,9 +30,6 @@ export default function Home() {
                             <li>
                                 <Link href="/calculadora" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-primary-700 hover:bg-gray-100 ">Calculadora</Link>
                             </li>                            
-                            {/* <li>
-                                <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-primary-700 hover:bg-gray-100  ">Preciso de Ajuda</a>
-                            </li> */}
                         </ul>
                     </div>
             
@@ -46,7 +43,7 @@ export default function Home() {
   )
 }
 
-export const getServerSideProps = canSSRAuth(async (ctx) => {
+export const getServerSideProps = canSSRAuth(async () => {
 
   return{
       props:{}

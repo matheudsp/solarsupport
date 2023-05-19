@@ -70,9 +70,8 @@ export default function Calculadora() {
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
-
-  return {
-    props: {}
-  }
+  return({
+    props:{}
+  })
 }
 )

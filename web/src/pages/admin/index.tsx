@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/Input"
 import Head from "next/head"
 import Image from "next/image"
 // import logoImg from '../../public/'
-import { Header } from "@/components/Header"
+
 import { FormEvent, useState, useContext } from "react"
 import { Footer } from "@/components/Footer"
 

@@ -34,7 +34,7 @@ type AuthProviderProps = {
     children: ReactNode;
 }
 export function signOut(){
-  console.log('ueppa')
+  
   try{
     destroyCookie(undefined, '@nextauth.token',{path:'/'})
     Router.push('/')

@@ -5,6 +5,7 @@ import Head from "next/head"
 import Link from "next/link"
 import Logo from "@/components/ui/Logo"
 
+
 import { useState } from "react"
 import { Footer } from "@/components/Footer"
 
@@ -13,6 +14,7 @@ import { AuthUserContext } from "@/contexts/UserContext"
 import { useContext, FormEvent } from "react"
 import { canSSRGuest } from "@/utils/canSSRGuest"
 import { toast } from "react-toastify"
+
 
 export default function SignIn() {
   const { signIn, user, isAuth } = useContext(AuthUserContext)
@@ -46,6 +48,7 @@ export default function SignIn() {
     <>
       <Head>
         <title>Solar Support - Solução completa em geradores fotovoltaicos</title>
+        
       </Head>
       <section className="bg-gray-300 h-screen">
       

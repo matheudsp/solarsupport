@@ -1,207 +1,122 @@
-import { useState } from 'react';
-
+import { BiExit } from 'react-icons/bi'
+import React, { useState } from 'react';
+import { signOut } from '@/contexts/UserContext';
+import { FiMenu } from 'react-icons/fi'
+import {ImPower} from 'react-icons/im'
+import {BiHomeAlt2} from 'react-icons/bi'
 import Link from 'next/link';
 import Logo from '../ui/Logo';
-import {FiMenu} from 'react-icons/fi'
-import {BsArrowRightShort} from 'react-icons/bs'
-import {BiExit} from 'react-icons/bi'
+import { Transition } from "@headlessui/react";
 
-import { signOut } from '@/contexts/UserContext';
+const menus = [
+  { name: "Início", link: "/home"},
+  { name: "Calculadora", link: "/calculadora"},
+  { name: "Sair", link: "/", ico: BiExit, fn: signOut }
+]
 
-import React from 'react';
-import { IconType } from 'react-icons';
-/** Links */
-interface NavLink {
-  title: string;
-  href?: string;
-  children?: NavLink[];
-  fn? : () => void
-  icon? : IconType
-}
-
-const links: NavLink[] = [
-  {
-    title: 'Início',
-    href: '/',
-    
-  },
-//   {
-//     title: 'Services',
-//     href: '#',
-//     children: [
-//       {
-//         title: 'Web development',
-//         href: '/services/web-development',
-//       },
-//       {
-//         title: 'Digital marketing',
-//         href: '/services/digital-marketing',
-//       },
-//       {
-//         title: 'Brand strategy',
-//         href: '/services/brand-strategy',
-//       },
-//     ],
-//   },
-  {
-    title: 'Calculadora',
-    href: '/calculadora',
-    
-  },
-  {
-    title:'Sair',
-    fn: signOut,
-    icon: BiExit,
-  }
-];
-
-
-
-
-/** NavLink */
-interface NavLinkProps extends React.HTMLProps<HTMLLinkElement> {
-  currentPath?: string;
-  fn?: () => void
-  icon?: IconType
-}
-
-function NavLink({ children, className, currentPath,fn, href, icon}: NavLinkProps) {
+export function Header() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <Link
-      className={`
-         flex flex-row whitespace-nowrap px-3 py-2 text-sm font-semibold no-underline transition hover:text-slate-900
-        ${
-          currentPath === href
-            ? 'text-slate-900'
-            : 'text-slate-400'
-        }
-        ${className}
-      `}
-      onClick={fn}
-      href={href}
-      
-    >
-      {children}
-      {icon && (React.createElement(icon, { size: "20" }))}
-    </Link>
     
-  );
-}
+      <nav className="bg-gray-50 shadow">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
+          <div className="flex flex-row items-center justify-between h-16 ">
+            <div className="flex flex-row w-full items-center justify-between">
+              <div className="flex-shrink-0">
+                <Logo className="w-28"/>
+              </div>
+              <div className="hidden md:block">
+                <div className="ml-10  items-baseline space-x-8 mx-auto flex flex-row ">
+                  {menus?.map((menu, i) => (
+                    <Link
+                      href={menu.link}
+                      key={i}
+                      onClick={menu.fn}
+                      className=" hover:bg-gray-300 text-slate-600 px-3 py-2 rounded-md text-base font-medium items-center flex flex-row"
+                    > 
+                      {menu.name}
+                      {menu.ico && <div className='ml-1'>{React.createElement(menu?.ico, { size: "18" })}</div>}
+                    </Link>))}
 
-/** Navigation */
-interface NavigationProps {
-  mobile?: boolean;
-  navLinks?: NavLink[];
-}
-
-function Navigation({ mobile = false, navLinks = [] }: NavigationProps) {
-  const [mobileNavigationOpened, setMobileNavigationOpened] = useState(false);
-
-  const navClassName = `
-    bg-white text-base 
-    ${
-      mobile
-        ? `transition transform -right-1/2 fixed top-0 z-20 h-full w-1/2 overflow-y-auto py-4 sm:hidden ${
-            mobileNavigationOpened ? '-translate-x-full shadow-2xl' : ''
-          }`
-        : 'hidden sm:block'
-    }
-  `;
-  const navListClassName = `
-    flex
-    ${mobile ? 'flex-col space-y-2' : 'items-center space-x-2'}
-  `;
-  const navListItemClassName = `
-    group relative
-    ${mobile ? 'w-full overflow-x-visible text-right' : ''}
-  `;
-  const navListLinkClassName = mobile ? 'mx-4' : '';
-  const navChildrenClassName = `
-    delay-75 ease-in-out space-y-2 
-    ${
-      mobile
-        ? 'h-0 overflow-y-hidden bg-slate-50 px-4 py-0 transition-all group-hover:h-full group-hover:py-4'
-        : 'invisible absolute z-30 rounded-lg border border-slate-50 bg-white p-4 opacity-0 shadow-xl transition-opacity group-hover:visible group-hover:opacity-100 '
-    }
-  `;
-
-  const closeMobileNavigation = () => setMobileNavigationOpened(false);
-
-  return (
-    <>
-      {mobile && (
-        <button
-          className="block text-slate-400 hover:text-slate-900 sm:hidden"
-          onClick={() => setMobileNavigationOpened(true)}
-          title="Open navigation menu"
-        >
-          <FiMenu  size={18}/>
-        </button>
-      )}
-
-      {mobile && mobileNavigationOpened && (
-        <div
-          className="fixed top-0 right-0 z-10 h-full w-full bg-slate-900 opacity-70  sm:hidden"
-          onClick={closeMobileNavigation}
-        ></div>
-      )}
-
-      <nav className={navClassName}>
-        <ul className={navListClassName}>
-          {mobile && (
-            <li className="text-right">
+                    
+                </div>
+              </div>
+            </div>
+            <div className="-mr-2 flex md:hidden">
               <button
-                className="px-6 py-2 text-slate-400 hover:text-slate-900 "
-                onClick={closeMobileNavigation}
+                onClick={() => setIsOpen(!isOpen)}
+                type="button"
+                className=" inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-400 focus:ring-white"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
               >
-                <BsArrowRightShort size={22}/>
+                <span className="sr-only">Open main menu</span>
+                {!isOpen ? (
+                  <svg
+                    className="block h-6 w-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    className="block h-6 w-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                )}
               </button>
-            </li>
+            </div>
+          </div>
+        </div>
+
+        <Transition
+          show={isOpen}
+          enter="transition ease-out duration-100 transform"
+          enterFrom="opacity-0 scale-95"
+          enterTo="opacity-100 scale-100"
+          leave="transition ease-in duration-75 transform"
+          leaveFrom="opacity-100 scale-100"
+          leaveTo="opacity-0 scale-95"
+        >
+          {(ref) => (
+            <div className="md:hidden" id="mobile-menu">
+              <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                {menus?.map((menu,i) => (<Link
+                  href={menu.link}
+                  className="hover:bg-gray-300 text-center text-slate-600 block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  {menu.name}
+                </Link>))}
+
+
+              </div>
+            </div>
           )}
-          {navLinks.map(({ title, href, children, fn, icon }) => (
-            <li className={navListItemClassName} key={href}  onClick={fn}>
-              <NavLink
-                className={navListLinkClassName}
-                currentPath="/home"
-                href={href}
-                icon={icon}
-              >
-                {title}
-               
-              </NavLink>
-              
-              {!!children?.length && (
-                <ul className={navChildrenClassName}>
-                  {children.map((child) => (
-                    <li key={child.href}>
-                      <NavLink href={child.href}>{child.title}</NavLink>
-                      
-                    </li>
-                  ))}
-                </ul>
-              )}
-              
-            </li>
-          ))}
-        </ul>
+        </Transition>
       </nav>
-    </>
-  );
+
+    
+
+  )
 }
 
-/** Header */
-interface HeaderProps {
-  navLinks?: NavLink[];
-}
-
-export function Header({ navLinks = links }: HeaderProps) {
-  return (
-    <header className="container bg-gray-50 mx-auto flex w-full items-center justify-between py-4 px-6">
-      <Link href="/">
-        <Logo className="w-28"/>
-      </Link>
-      <Navigation navLinks={navLinks} />
-      <Navigation mobile navLinks={navLinks} />
-    </header>
-  );
-}
