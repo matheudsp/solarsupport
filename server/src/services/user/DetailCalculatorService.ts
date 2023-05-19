@@ -3,7 +3,11 @@ import prismaClient from "../../prisma";
 class DetailCalculatorService {
   async execute() {
 
-    const pot = await prismaClient.potenciaPlacas.findFirst()
+    const pot = await prismaClient.potenciaPlacas.findMany({
+      select:{
+        potencia:true
+      }
+    })
 
     const custo = await prismaClient.custoPorKWH.findMany({
       select:{
