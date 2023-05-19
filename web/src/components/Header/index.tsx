@@ -101,7 +101,9 @@ export function Header() {
           {(ref) => (
             <div className="md:hidden" id="mobile-menu">
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                {menus?.map((menu,i) => (<Link
+                {menus?.map((menu,i) => (
+                <Link
+                  key={i}
                   href={menu.link}
                   className="hover:bg-gray-300 text-center text-slate-600 block px-3 py-2 rounded-md text-base font-medium"
                 >
