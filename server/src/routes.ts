@@ -22,8 +22,6 @@ router.post('/acessar', new AuthUserController().handle)
 
 router.get('/perfil', isAuth, new DetailUserController().handle)
 
-router.get('/calculadora' , isAuth, new DetailCalculatorController().handle)
-
 //-- ROTAS ADMIN --
 router.post('/admin', new AuthAdminController().handle)
 
@@ -45,6 +43,9 @@ router.post('/admin/calculadora', isAuth, new CreateCalculatorController().handl
 
 router.put('/admin/calculadora', isAuth, new UpdateCalculatorController().handle)
 
+
+// -- Global routes --
+router.get('/calculadora' , isAuth, new DetailCalculatorController().handle)
 
 
 export { router }; 
