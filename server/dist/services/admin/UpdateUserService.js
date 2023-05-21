@@ -15,6 +15,26 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
 
 // src/services/admin/UpdateUserService.ts
 var UpdateUserService_exports = {};
@@ -31,22 +51,24 @@ var prisma_default = prismaClient;
 // src/services/admin/UpdateUserService.ts
 var import_bcryptjs = require("bcryptjs");
 var UpdateUsersService = class {
-  async execute({ userId, nome, email, senha, comissao }) {
-    if (senha) {
-      senha = await (0, import_bcryptjs.hash)(senha, 8);
-    }
-    const users = await prisma_default.vendedor.update({
-      where: {
-        id: userId
-      },
-      data: {
-        nome,
-        senha,
-        email,
-        comissao
+  execute(_0) {
+    return __async(this, arguments, function* ({ userId, nome, email, senha, comissao }) {
+      if (senha) {
+        senha = yield (0, import_bcryptjs.hash)(senha, 8);
       }
+      const users = yield prisma_default.vendedor.update({
+        where: {
+          id: userId
+        },
+        data: {
+          nome,
+          senha,
+          email,
+          comissao
+        }
+      });
+      return users;
     });
-    return users;
   }
 };
 // Annotate the CommonJS export names for ESM import in node:

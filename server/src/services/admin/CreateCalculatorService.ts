@@ -2,7 +2,7 @@ import prismaClient from '../../prisma'
 
 
 interface CalculatorRequest {
-    potencia?: number;
+    potencia?: string;
     faixaInicial?: number;
     faixaFinal?: number;
     valorCusto?: string

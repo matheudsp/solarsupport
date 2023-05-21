@@ -15,6 +15,26 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
 
 // src/services/admin/CreateAdminService.ts
 var CreateAdminService_exports = {};
@@ -31,32 +51,34 @@ var prisma_default = prismaClient;
 // src/services/admin/CreateAdminService.ts
 var import_bcryptjs = require("bcryptjs");
 var CreateAdminService = class {
-  async execute({ nome, email, senha }) {
-    if (!email) {
-      throw new Error("Email incorreto.");
-    }
-    const AdminAlreadyExists = await prisma_default.admin.findFirst({
-      where: {
-        email
+  execute(_0) {
+    return __async(this, arguments, function* ({ nome, email, senha }) {
+      if (!email) {
+        throw new Error("Email incorreto.");
       }
-    });
-    if (AdminAlreadyExists) {
-      throw new Error("Usu\xE1rio existente.");
-    }
-    const passwordHash = await (0, import_bcryptjs.hash)(senha, 8);
-    const admin = await prisma_default.admin.create({
-      data: {
-        nome,
-        email,
-        senha: passwordHash
-      },
-      select: {
-        id: true,
-        nome: true,
-        email: true
+      const AdminAlreadyExists = yield prisma_default.admin.findFirst({
+        where: {
+          email
+        }
+      });
+      if (AdminAlreadyExists) {
+        throw new Error("Usu\xE1rio existente.");
       }
+      const passwordHash = yield (0, import_bcryptjs.hash)(senha, 8);
+      const admin = yield prisma_default.admin.create({
+        data: {
+          nome,
+          email,
+          senha: passwordHash
+        },
+        select: {
+          id: true,
+          nome: true,
+          email: true
+        }
+      });
+      return admin;
     });
-    return admin;
   }
 };
 // Annotate the CommonJS export names for ESM import in node:

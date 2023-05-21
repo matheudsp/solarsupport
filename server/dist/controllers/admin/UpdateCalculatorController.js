@@ -15,6 +15,26 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
 
 // src/controllers/admin/UpdateCalculatorController.ts
 var UpdateCalculatorController_exports = {};
@@ -30,46 +50,50 @@ var prisma_default = prismaClient;
 
 // src/services/admin/UpdateCalculatorService.ts
 var UpdateCalculatorService = class {
-  async execute({ potencia, id, faixaInicial, faixaFinal, valorCusto }) {
-    if (potencia) {
-      const pot = await prisma_default.potenciaPlacas.update({
-        where: {
-          id: 1
-        },
-        data: {
-          potencia
-        }
-      });
-      return pot;
-    } else {
-      const custo = await prisma_default.custoPorKWH.update({
-        where: {
-          id
-        },
-        data: {
-          faixaInicial,
-          faixaFinal,
-          valorCusto
-        }
-      });
-      return custo;
-    }
+  execute(_0) {
+    return __async(this, arguments, function* ({ potencia, id, faixaInicial, faixaFinal, valorCusto }) {
+      if (potencia) {
+        const pot = yield prisma_default.potenciaPlacas.update({
+          where: {
+            id: 1
+          },
+          data: {
+            potencia
+          }
+        });
+        return pot;
+      } else {
+        const custo = yield prisma_default.custoPorKWH.update({
+          where: {
+            id
+          },
+          data: {
+            faixaInicial,
+            faixaFinal,
+            valorCusto
+          }
+        });
+        return custo;
+      }
+    });
   }
 };
 
 // src/controllers/admin/UpdateCalculatorController.ts
 var UpdateCalculatorController = class {
-  async handle(req, res) {
-    const { potencia, id, faixaFinal, faixaInicial, valorCusto } = req.body;
-    const updateCalculatorService = new UpdateCalculatorService();
-    const update = await updateCalculatorService.execute({
-      potencia,
-      id,
-      faixaInicial,
-      faixaFinal,
-      valorCusto
+  handle(req, res) {
+    return __async(this, null, function* () {
+      const { potencia, id, faixaFinal, faixaInicial, valorCusto } = req.body;
+      const updateCalculatorService = new UpdateCalculatorService();
+      const update = yield updateCalculatorService.execute({
+        potencia,
+        id,
+        faixaInicial,
+        faixaFinal,
+        valorCusto
+      });
+      return res.json(update);
     });
-    return res.json(update);
   }
 };
 // Annotate the CommonJS export names for ESM import in node:
