@@ -1,6 +1,6 @@
 import prismaClient from "../../prisma";
 interface calculatorRequest {
-  potencia?: number
+  potencia?: string
   id?: number,
   faixaInicial?: number,
   faixaFinal?: number,

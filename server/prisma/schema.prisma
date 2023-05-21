@@ -30,7 +30,7 @@ model Vendedor {
 
 model PotenciaPlacas {
   id       Int @id @default(1)
-  potencia Int
+  potencia String
 }
 
 model CustoPorKWH {
