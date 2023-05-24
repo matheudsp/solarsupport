@@ -16,7 +16,7 @@ export default function Sidebar() {
         { name: "Painel de Vendedores", link: "/admin/painel", icon: HiUserGroup },
         { name: "Modificar Vendedor", link: "/admin/modificar", icon: RiSettings4Line },
         { name: "Cadastrar Vendedor", link: "/admin/cadastrar", icon: AiOutlineUserAdd, margin: false },
-        { name: "Alterar Calculadora", link: "/admin/modificar/calculadora", icon: AiOutlineCalculator },
+        { name: "Alterar Simulador", link: "/admin/modificar/simulador", icon: AiOutlineCalculator },
         { name: "Sair", function: signOutAdmin,link:'/admin', icon: TbDoorExit, margin: true },
     ];
     const [open, setOpen] = useState(false);

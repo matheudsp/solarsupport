@@ -19,7 +19,7 @@ type UserProps = {
     id: string;
     nome: string;
     email: string;
-    comissao: Float32Array;
+    comissao: string;
 
 }
 

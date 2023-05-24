@@ -212,7 +212,7 @@ export default function Modificar({ calcList }: PageProps) {
 
              
               </h4> */}
-              <p className="md:pl-3 text-sm mb-3">Para atualizar os dados da calculadora, altere apenas a informação preferida e clique em <span className="text-green-600 font-medium">salvar</span>. É importante lembrar que essas informações influenciam o cálculo de todos usuários.</p>
+              <p className="md:pl-3 text-sm mb-3">Para atualizar os dados do simulador, altere apenas a informação preferida e clique em <span className="text-green-600 font-medium">salvar</span>. É importante lembrar que essas informações influenciam o cálculo de todos usuários.</p>
 
               <form onSubmit={handleUpdate}>
                 <h2 className="w-full justify-center flex mx-auto "><button onClick={changeMode} type="button" className="text-center p-2 rounded-xl text-xs font-medium bg-gray-300">Alternar para {(mode ? ('Potência'):('Custo'))}</button></h2>

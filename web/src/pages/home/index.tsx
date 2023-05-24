@@ -28,7 +28,7 @@ export default function Home() {
                                 <Link href="/home" className="block py-2 pr-4 pl-3 text-white lg:text-gray-700 rounded bg-primary-700 lg:bg-white hover:text-primary-700 border-b border-gray-100 hover:bg-gray-100" aria-current="page">Página Inicial</Link>
                             </li>
                             <li>
-                                <Link href="/calculadora" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-primary-700 hover:bg-gray-100 ">Calculadora</Link>
+                                <Link href="/simulador" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-primary-700 hover:bg-gray-100 ">Simulador de Projetos</Link>
                             </li>                            
                         </ul>
                     </div>

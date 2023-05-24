@@ -1,16 +1,14 @@
 import { BiExit } from 'react-icons/bi'
 import React, { useState } from 'react';
 import { signOut } from '@/contexts/UserContext';
-import { FiMenu } from 'react-icons/fi'
-import {ImPower} from 'react-icons/im'
-import {BiHomeAlt2} from 'react-icons/bi'
+import {TbSolarPanel} from 'react-icons/tb'
 import Link from 'next/link';
 import Logo from '../ui/Logo';
 import { Transition } from "@headlessui/react";
-
+import {AiFillHome} from 'react-icons/ai'
 const menus = [
-  { name: "Início", link: "/home"},
-  { name: "Calculadora", link: "/calculadora"},
+  { name: "Início", link: "/home", ico:AiFillHome},
+  { name: "Simulação de Projetos", link: "/simulador", ico:TbSolarPanel},
   { name: "Sair", link: "/", ico: BiExit, fn: signOut }
 ]
 
@@ -50,7 +48,7 @@ export function Header() {
                 aria-controls="mobile-menu"
                 aria-expanded="false"
               >
-                <span className="sr-only">Open main menu</span>
+                <span className="sr-only">Abrir menu</span>
                 {!isOpen ? (
                   <svg
                     className="block h-6 w-6"
@@ -105,9 +103,11 @@ export function Header() {
                 <Link
                   key={i}
                   href={menu.link}
-                  className="hover:bg-gray-300 text-center text-slate-600 block px-3 py-2 rounded-md text-base font-medium"
+                  onClick={menu.fn}
+                  className="hover:bg-gray-300 text-center text-slate-600 px-3 py-2 rounded-md text-base font-medium  items-center justify-center flex flex-row"
                 >
                   {menu.name}
+                  {menu.ico && <div className='ml-1'>{React.createElement(menu?.ico, { size: "18" })}</div>}
                 </Link>))}
 
 

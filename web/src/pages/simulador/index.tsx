@@ -4,30 +4,56 @@ import Head from "next/head"
 import Image from "next/image"
 // import logoImg from '../../public/'
 import { Header } from "@/components/Header"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Result } from "@/components/ui/Result"
 import { canSSRAuth } from "@/utils/canSSRAuth"
 import { Footer } from "@/components/Footer"
 import logo from '../../../public/logo09.png'
-//examples
+import { setupAPIClient } from "@/services/api"
+import { AuthUserContext } from "@/contexts/UserContext"
 
+// dados a receber da requisicao da api
+type CalcProps = {
+  pot: PotProps;
+  custo: CustoProps[];
+}
 
-const potencia = 550
-const custo = 33
+type PotProps = {
+  id: number,
+  potencia: string
+}
 
-export default function Calculadora() {
+type CustoProps = {
+  id: number;
+  valorCusto: string;
+  faixaInicial: number;
+  faixaFinal: number;
+}
 
+interface PageProps {
+  calcList: CalcProps;
+}
+
+export default function Simulador({calcList}:PageProps) {
+  const {user} = useContext(AuthUserContext)
   const [geracao, setGeracao] = useState()
   const [valorSistema, setValorSistema] = useState(0)
-
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  function handleChangeResult(geracao) {
+  function handleChangeResult(geracao: any) {
     setIsLoading(true)
     setGeracao(geracao)
-    // const geracaoMensal = (130 * (potencia / 1000) * 15) * 30
+    let custo;
+    for (const alcance of calcList.custo){
+      if(geracao >= alcance.faixaInicial && geracao <= alcance.faixaFinal){
+        custo = parseFloat(alcance.valorCusto);
+        break;
+      }
+    }
+
     const valorSistema = geracao * custo
-    const comissaoVendededor = valorSistema * 0.02
+    const comissaoVendededor = valorSistema * (parseFloat(user.comissao)/100)
+
     setValorSistema(valorSistema + comissaoVendededor)
     setIsLoading(false)
   }
@@ -36,14 +62,14 @@ export default function Calculadora() {
       <Head>
         <title>Solar Support - Solução completa em geradores fotovoltaicos</title>
       </Head>
-      <Header />
+     
       <section className="bg-gray-300 w-full h-screen">
-        {/* <Image src={logo} alt="bg" className="-z-50 "/> */}
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto ">
+      <Header />
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
           <div className="w-full bg-white rounded-lg shadow sm:max-w-md xl:p-0">
 
             <div className="px-6 pb-6 space-y-2 md:space-y-3">
-              <h1 className="lg:text-lg md:text-2xl font-extrabold text-center pt-6">Calculadora</h1>
+              <h1 className="lg:text-lg md:text-2xl font-extrabold text-center pt-6">Simulador de Projetos </h1>
               <label className="block mb-2 text-sm font-medium text-gray-900">Geração Esperada do Sistema(em kWh)</label>
               <Input
                 placeholder="Ex: 1000 kWh"
@@ -61,6 +87,9 @@ export default function Calculadora() {
               </div>
             </div>
           </div>
+          <div className="w-full mt-5 bg-white rounded-lg shadow sm:max-w-md xl:p-0">
+          <div className="px-6 pb-6 space-y-2 md:space-y-3"></div>
+          </div>
         </div>
         {/* <Footer /> */}
       </section>
@@ -70,8 +99,14 @@ export default function Calculadora() {
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
+  const apiClient = setupAPIClient(ctx)
+
+  
+  const response = await apiClient.get('/calculadora')
   return({
-    props:{}
+    props:{
+      calcList: response.data
+    }
   })
 }
 )
