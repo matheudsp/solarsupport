@@ -270,7 +270,7 @@ export default function Modificar({ calcList }: PageProps) {
                   style={{ backgroundColor: '#28a745' }}
                   type="button"
                   onClick={handleChangeButton}
-                >Salvar <AiFillDelete className="ml-1" /></Button>) :
+                >Salvar <AiFillSave className="ml-1" /></Button>) :
                   (<Button
                     style={{ backgroundColor: '#eed202 ' }}
                     type="submit"

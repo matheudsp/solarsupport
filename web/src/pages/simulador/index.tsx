@@ -87,9 +87,13 @@ export default function Simulador({calcList}:PageProps) {
               </div>
             </div>
           </div>
-          <div className="w-full mt-5 bg-white rounded-lg shadow sm:max-w-md xl:p-0">
-          <div className="px-6 pb-6 space-y-2 md:space-y-3"></div>
+          {/* <div className="w-full mt-5 bg-white rounded-lg shadow sm:max-w-md xl:p-0">
+          <div className="p-6 space-y-2 md:space-y-3">
+            Sugestão de Sistema
+            inversor de 6kwp
+            14 placas de 555W
           </div>
+          </div> */}
         </div>
         {/* <Footer /> */}
       </section>
