@@ -27,10 +27,15 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 
 })
 
+//PRODUCTION SERVER
 app.listen({
   host:'0.0.0.0',
   port: process.env.PORT ? Number(process.env.PORT) : 3333
 }, () => console.log('HTTP Server Running!'))
+
+
+//DEVELOPMENT SERVER
+// app.listen(3333, () => console.log('Backend On-line!'))
 
 
 

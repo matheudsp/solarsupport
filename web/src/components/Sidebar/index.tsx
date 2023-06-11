@@ -4,8 +4,8 @@ import { HiUserGroup } from "react-icons/hi";
 import { RiSettings4Line } from "react-icons/ri";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { TbDoorExit } from "react-icons/tb"
-import {AiOutlineCalculator} from  'react-icons/ai'
-
+import {CgFileDocument} from 'react-icons/cg'
+import {TbSolarPanel} from 'react-icons/tb'
 import Link from "next/link";
 import { signOutAdmin } from "@/contexts/AdminContext";
 
@@ -15,8 +15,9 @@ export default function Sidebar() {
     const menus = [
         { name: "Painel de Vendedores", link: "/admin/painel", icon: HiUserGroup },
         { name: "Modificar Vendedor", link: "/admin/modificar", icon: RiSettings4Line },
-        { name: "Cadastrar Vendedor", link: "/admin/cadastrar", icon: AiOutlineUserAdd, margin: false },
-        { name: "Alterar Simulador", link: "/admin/modificar/simulador", icon: AiOutlineCalculator },
+        { name: "Cadastrar Vendedor", link: "/admin/cadastrar", icon: AiOutlineUserAdd },
+        { name: "Alterar Simulador", link: "/admin/modificar/simulador", icon: TbSolarPanel },
+        { name: "Gerar Contrato", link: "/admin/proposta", icon: CgFileDocument },
         { name: "Sair", function: signOutAdmin,link:'/admin', icon: TbDoorExit, margin: true },
     ];
     const [open, setOpen] = useState(false);

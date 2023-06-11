@@ -9,14 +9,24 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
  }
 
  
-export function Input({...rest }: InputProps) {
+ export function Input({ children, ...rest }: InputProps) {
     return (
-        <input style={{ MozAppearance: "textfield", WebkitAppearance: 'none' }}
-            className="bg-gray-50 border-2 border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-            {...rest}>
-        </input>
-    )
-}
+      <div className="">
+        <input
+          style={{ MozAppearance: "textfield", WebkitAppearance: "none" }}
+          className="bg-gray-50 border-2 border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+          {...rest}
+        />
+        <div className="hidden md:block ">
+        {children && (
+          <div className=" absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-500  w-10 bg-gray-50 rounded-lg  p-2.5 items-center justify-center flex">
+            {children}
+          </div>
+        )}
+      </div>
+      </div>
+    );
+  }
 
 export function TextArea({ ...rest }: TextAreaProps) {
     return (
