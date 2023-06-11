@@ -15,26 +15,6 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var __async = (__this, __arguments, generator) => {
-  return new Promise((resolve, reject) => {
-    var fulfilled = (value) => {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var rejected = (value) => {
-      try {
-        step(generator.throw(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
-    step((generator = generator.apply(__this, __arguments)).next());
-  });
-};
 
 // src/controllers/admin/CreateCalculatorController.ts
 var CreateCalculatorController_exports = {};
@@ -50,43 +30,39 @@ var prisma_default = prismaClient;
 
 // src/services/admin/CreateCalculatorService.ts
 var CreateCalculatorService = class {
-  execute(_0) {
-    return __async(this, arguments, function* ({ faixaInicial, faixaFinal, valorCusto, potencia }) {
-      if (potencia) {
-        const pot = yield prisma_default.potenciaPlacas.create({
-          data: {
-            potencia
-          }
-        });
-        return pot;
-      } else {
-        const info = yield prisma_default.custoPorKWH.create({
-          data: {
-            faixaInicial,
-            faixaFinal,
-            valorCusto
-          }
-        });
-        return info;
-      }
-    });
+  async execute({ faixaInicial, faixaFinal, valorCusto, potencia }) {
+    if (potencia) {
+      const pot = await prisma_default.potenciaPlacas.create({
+        data: {
+          potencia
+        }
+      });
+      return pot;
+    } else {
+      const info = await prisma_default.custoPorKWH.create({
+        data: {
+          faixaInicial,
+          faixaFinal,
+          valorCusto
+        }
+      });
+      return info;
+    }
   }
 };
 
 // src/controllers/admin/CreateCalculatorController.ts
 var CreateCalculatorController = class {
-  handle(req, res) {
-    return __async(this, null, function* () {
-      const { potencia, faixaFinal, faixaInicial, valorCusto } = req.body;
-      const createCalculatorService = new CreateCalculatorService();
-      const admin = yield createCalculatorService.execute({
-        potencia,
-        faixaInicial,
-        faixaFinal,
-        valorCusto
-      });
-      return res.json(admin);
+  async handle(req, res) {
+    const { potencia, faixaFinal, faixaInicial, valorCusto } = req.body;
+    const createCalculatorService = new CreateCalculatorService();
+    const admin = await createCalculatorService.execute({
+      potencia,
+      faixaInicial,
+      faixaFinal,
+      valorCusto
     });
+    return res.json(admin);
   }
 };
 // Annotate the CommonJS export names for ESM import in node:

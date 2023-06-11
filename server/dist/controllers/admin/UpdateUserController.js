@@ -15,26 +15,6 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-var __async = (__this, __arguments, generator) => {
-  return new Promise((resolve, reject) => {
-    var fulfilled = (value) => {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var rejected = (value) => {
-      try {
-        step(generator.throw(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
-    step((generator = generator.apply(__this, __arguments)).next());
-  });
-};
 
 // src/controllers/admin/UpdateUserController.ts
 var UpdateUserController_exports = {};
@@ -51,42 +31,38 @@ var prisma_default = prismaClient;
 // src/services/admin/UpdateUserService.ts
 var import_bcryptjs = require("bcryptjs");
 var UpdateUsersService = class {
-  execute(_0) {
-    return __async(this, arguments, function* ({ userId, nome, email, senha, comissao }) {
-      if (senha) {
-        senha = yield (0, import_bcryptjs.hash)(senha, 8);
+  async execute({ userId, nome, email, senha, comissao }) {
+    if (senha) {
+      senha = await (0, import_bcryptjs.hash)(senha, 8);
+    }
+    const users = await prisma_default.vendedor.update({
+      where: {
+        id: userId
+      },
+      data: {
+        nome,
+        senha,
+        email,
+        comissao
       }
-      const users = yield prisma_default.vendedor.update({
-        where: {
-          id: userId
-        },
-        data: {
-          nome,
-          senha,
-          email,
-          comissao
-        }
-      });
-      return users;
     });
+    return users;
   }
 };
 
 // src/controllers/admin/UpdateUserController.ts
 var UpdateUsersController = class {
-  handle(req, res) {
-    return __async(this, null, function* () {
-      const { userId, nome, email, comissao, senha } = req.body;
-      const updateUsers = new UpdateUsersService();
-      const users = yield updateUsers.execute({
-        userId,
-        nome,
-        email,
-        comissao,
-        senha
-      });
-      return res.json(users);
+  async handle(req, res) {
+    const { userId, nome, email, comissao, senha } = req.body;
+    const updateUsers = new UpdateUsersService();
+    const users = await updateUsers.execute({
+      userId,
+      nome,
+      email,
+      comissao,
+      senha
     });
+    return res.json(users);
   }
 };
 // Annotate the CommonJS export names for ESM import in node:

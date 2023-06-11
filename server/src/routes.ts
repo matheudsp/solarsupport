@@ -44,7 +44,7 @@ router.post('/admin/calculadora', isAuth, new CreateCalculatorController().handl
 
 router.put('/admin/calculadora', isAuth, new UpdateCalculatorController().handle)
 
-router.get('/admin/gerar-proposta/manutencao', isAuth, new GenerateProposalController().handle)
+router.post('/admin/gerar-proposta/manutencao', isAuth, new GenerateProposalController().handle)
 
 // -- Global routes --
 router.get('/calculadora' , isAuth, new DetailCalculatorController().handle)
