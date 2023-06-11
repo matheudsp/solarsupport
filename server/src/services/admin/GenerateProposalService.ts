@@ -14,7 +14,7 @@ interface docData {
   precoTotal: string
 }
 
-const INPUT = 'src/template/template.docx';
+const INPUT = 'template/template.docx';
 export const OUTPUT_DOCX = 'cache/proposta.docx';
 export const OUTPUT_PDF = 'cache/proposta.pdf';
 

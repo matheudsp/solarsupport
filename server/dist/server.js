@@ -612,6 +612,90 @@ var UpdateCalculatorController = class {
   }
 };
 
+// src/controllers/admin/GenerateProposalController.ts
+var import_fs = __toESM(require("fs"));
+var import_node_path2 = __toESM(require("path"));
+
+// src/services/admin/GenerateProposalService.ts
+var import_yumdocs = require("@yumdocs/yumdocs");
+var import_node_path = __toESM(require("path"));
+var import_convertapi = __toESM(require("convertapi"));
+var INPUT = "template/template.docx";
+var OUTPUT_DOCX = "cache/proposta.docx";
+var OUTPUT_PDF = "cache/proposta.pdf";
+var GenerateProposalService = class {
+  execute(_0) {
+    return __async(this, arguments, function* ({ cliente, clienteId, clienteEmail, mediaConsumo, potenciaProjeto, vendedor, precoTotal }) {
+      try {
+        const t = new import_yumdocs.YumTemplate();
+        const i = import_node_path.default.resolve(process.cwd(), INPUT);
+        const outputDocx = import_node_path.default.resolve(process.cwd(), OUTPUT_DOCX);
+        yield t.load(i);
+        const dataAtual = /* @__PURE__ */ new Date();
+        const dia = dataAtual.getDate();
+        const mes = dataAtual.getMonth() + 1;
+        const ano = dataAtual.getFullYear();
+        yield t.render({
+          cliente,
+          clienteId,
+          email: clienteEmail,
+          mediaConsumo,
+          potenciaProjeto,
+          data: `${dia}/${mes}/${ano}`,
+          vendedor,
+          precoTotal
+        });
+        yield t.saveAs(outputDocx);
+        const convertapi = new import_convertapi.default("iLRaEC899dUflho3", { conversionTimeout: 60 });
+        yield convertapi.convert("pdf", { File: "cache/proposta.docx" }).then(function(result) {
+          return result.file.save("cache/proposta.pdf");
+        }).catch(function(e) {
+          return e.toString();
+        });
+      } catch (e) {
+        return e;
+      }
+      return OUTPUT_PDF;
+    });
+  }
+};
+
+// src/controllers/admin/GenerateProposalController.ts
+var GenerateProposalController = class {
+  handle(req, res) {
+    return __async(this, null, function* () {
+      const inputDocx = import_node_path2.default.resolve(process.cwd(), OUTPUT_DOCX);
+      if (import_fs.default.existsSync(inputDocx)) {
+        import_fs.default.unlink(inputDocx, (e) => {
+          if (e) {
+            return res.json(e);
+          }
+        });
+      }
+      const {
+        cliente,
+        clienteId,
+        clienteEmail,
+        mediaConsumo,
+        potenciaProjeto,
+        vendedor,
+        precoTotal
+      } = req.body;
+      const generateProposal = new GenerateProposalService();
+      const pdf = yield generateProposal.execute({
+        cliente,
+        clienteId,
+        clienteEmail,
+        mediaConsumo,
+        potenciaProjeto,
+        vendedor,
+        precoTotal
+      });
+      return res.download(pdf);
+    });
+  }
+};
+
 // src/routes.ts
 var router = (0, import_express.Router)();
 router.post("/acessar", new AuthUserController().handle);
@@ -626,6 +710,7 @@ router.delete("/admin/excluir", isAuth, new DeleteUserController().handle);
 router.get("/admin/perfil", isAuth, new DetailAdminController().handle);
 router.post("/admin/calculadora", isAuth, new CreateCalculatorController().handle);
 router.put("/admin/calculadora", isAuth, new UpdateCalculatorController().handle);
+router.get("/admin/gerar-proposta/manutencao", isAuth, new GenerateProposalController().handle);
 router.get("/calculadora", isAuth, new DetailCalculatorController().handle);
 
 // src/server.ts
