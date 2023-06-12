@@ -172,7 +172,7 @@ export default function Proposta() {
                     <Input type="text" onChange={(e) => { setMediaConsumo(e.target.value) }} value={mediaConsumo} placeholder="Ex: 549 kWh" ><SlEnergy /></Input>
                   </div>
                   <div className="col-span-6 relative">
-                    <span className="md:absolute rounded-xl md:bg-gray-50 left-3 -top-[12px] px-2">Média de Consumo Mensal</span>
+                    <span className="md:absolute rounded-xl md:bg-gray-50 left-3 -top-[12px] px-2">Potencia do Projeto</span>
                     <Input type="text" onChange={(e) => { setPotenciaProjeto(e.target.value) }} value={potenciaProjeto} placeholder="Ex: 655 kW" ><SlEnergy /></Input>
                   </div>
                   <div className="col-span-6 relative">
