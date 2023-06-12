@@ -17,7 +17,7 @@ export default function Sidebar() {
         { name: "Modificar Vendedor", link: "/admin/modificar", icon: RiSettings4Line },
         { name: "Cadastrar Vendedor", link: "/admin/cadastrar", icon: AiOutlineUserAdd },
         { name: "Alterar Simulador", link: "/admin/modificar/simulador", icon: TbSolarPanel },
-        { name: "Gerar Contrato", link: "/admin/proposta", icon: CgFileDocument },
+        { name: "Gerar Proposta", link: "/admin/proposta", icon: CgFileDocument },
         { name: "Sair", function: signOutAdmin,link:'/admin', icon: TbDoorExit, margin: true },
     ];
     const [open, setOpen] = useState(false);

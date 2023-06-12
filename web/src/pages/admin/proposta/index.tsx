@@ -144,7 +144,7 @@ export default function Proposta() {
             </div>
             <div className="w-full border-t mb-2 md:border-gray-300 border-gray-400"></div>
 
-            <h4 className="flex md:flex-row flex-col md:justify-start md:pl-3 md:text-xl justify-center font-bold text-lg items-center pt-2">Dados da Proposta:
+            <h4 className="flex md:flex-row flex-col md:justify-start md:pl-3 md:text-xl justify-center font-bold text-lg items-center pt-2">Tipo de Proposta:
               {!ProposalList[''] && ProposalList[proposalSelected] && (
                 <span className="ml-2 bg-blue-200 rounded-lg bg-opacity-50 text-blue-800 p-1.5 font-medium text-sm uppercase tracking-wider"> {ProposalList[proposalSelected].nome}</span>
               )}
