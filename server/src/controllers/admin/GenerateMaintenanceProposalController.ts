@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
 import fs from 'fs';
 import path from 'node:path';
-import { OUTPUT_DOCX } from '../../services/admin/GenerateProposalService';
+import { OUTPUT_DOCX } from '../../services/admin/GenerateMaintenanceProposalService';
 
-import { GenerateProposalService } from '../../services/admin/GenerateProposalService';
+import { GenerateMaintenanceProposalService } from '../../services/admin/GenerateMaintenanceProposalService';
 
-class GenerateProposalController {
+class GenerateMaintenanceProposalController {
 
   async handle(req: Request, res: Response) {
     const inputDocx = path.resolve(process.cwd(), OUTPUT_DOCX);
@@ -30,9 +30,9 @@ class GenerateProposalController {
       precoTotal
     } = req.body;
 
-    const generateProposal = new GenerateProposalService();
+    const generateProposal = new GenerateMaintenanceProposalService();
 
-    const pdf = await generateProposal.execute({
+    const proposalInfo = await generateProposal.execute({
       cliente,
       clienteId,
       clienteEmail,
@@ -42,12 +42,12 @@ class GenerateProposalController {
       precoTotal
     });
 
-    return res.download(pdf);
+    return res.download(proposalInfo);
 
 
   }
 }
 
 
-export { GenerateProposalController }
+export { GenerateMaintenanceProposalController }
 
