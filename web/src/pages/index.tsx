@@ -88,6 +88,7 @@ export default function SignIn() {
                   <label className="block text-sm ml-2 font-medium text-gray-900">Mostrar Senha</label>
                 </div>
                 <Button
+                  classname="bg-primary-500 w-full hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300"
                   type="submit"
                   loading={loading}
                   onClick={handleLogin}

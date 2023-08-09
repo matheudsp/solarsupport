@@ -33,7 +33,7 @@ export default function Painel({ users }: HomeProps) {
       <Head>
         <title>Solar Support - Solução completa em geradores fotovoltaicos</title>
       </Head>
-      <div className="bg-gray-300 flex h-auto">
+      <div className="bg-gray-300 flex min-h-screen">
         <Sidebar />
         <div className="w-10/12 mx-auto p-3">
           <div className=" md:p-6 md:bg-gray-50 md:mt-10 md:rounded-xl">

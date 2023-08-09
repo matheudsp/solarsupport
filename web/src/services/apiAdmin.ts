@@ -9,10 +9,10 @@ export function setupAPIAdmin( context = undefined){
 
     const api = axios.create({
         //PRODUCTION SERVER
-        baseURL: 'https://solarsupport.onrender.com/',
+        // baseURL: 'https://solarsupport.onrender.com/',
         
         //DEVELOPMENT SERVER
-        // baseURL: 'http://localhost:3333',
+        baseURL: 'http://localhost:3333',
 
         headers: {
             "Content-Type":'application/json',

@@ -136,7 +136,7 @@ export default function Modificar({ calcList }: PageProps) {
       <Head>
         <title>Solar Support - Solução completa em geradores fotovoltaicos</title>
       </Head>
-      <div className="bg-gray-300 flex h-auto">
+      <div className="bg-gray-300 flex min-h-screen">
         <Sidebar />
 
 

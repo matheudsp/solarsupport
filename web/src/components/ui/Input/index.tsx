@@ -19,7 +19,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
         />
         <div className="hidden md:block ">
         {children && (
-          <div className=" absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-500  w-10 bg-gray-50 rounded-lg  p-2.5 items-center justify-center flex">
+          <div className=" absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-500  w-10 bg-gray-50 rounded-lg  p-2 items-center justify-center flex">
             {children}
           </div>
         )}

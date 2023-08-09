@@ -25,7 +25,7 @@ export default function Sidebar() {
     return (
 
         <div
-            className={`bg-[#08438f] min-h-screen ${open ? "w-72 absolute md:static " : "w-16"
+            className={`bg-[#0b54b3] min-h-screen ${open ? "w-72 absolute md:static " : "w-16"
                 } duration-300 text-gray-100 px-4 z-50 `}
         >
             <div className="py-3 flex justify-end">
