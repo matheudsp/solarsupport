@@ -8,7 +8,7 @@ O Solar Support é um sistema completo com backend e frontend, que inclui uma ca
 
 - **Simulação de Preços**: Calcule o preço de sistemas solares com base em variáveis configuráveis.
 - **Autenticação**: Sistema de login seguro utilizando JWT.
-- **Geração de Propostas**: Criação de arquivos de proposta detalhados para clientes.
+- **Geração de Propostas**: Criação de arquivos de proposta detalhados para clientes. (Em criação -- incompleta)
 - **Interface Responsiva**: Frontend moderno e responsivo utilizando React e TailwindCSS.
 
 ## Tecnologias Utilizadas
