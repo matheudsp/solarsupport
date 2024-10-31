@@ -7,25 +7,25 @@ O Solar Support é um sistema completo com backend e frontend, que inclui uma ca
 ## PrintScreens
 
 ### Tela de Login
-![Tela de Login](imagens/login.png)
+![Tela de Login](images/login.png)
 
 ### Listagem de Vendedores
-![Listagem de Vendedores](imagens/lista-vendedores.png)
+![Listagem de Vendedores](images/lista-vendedores.png)
 
 ### Geração de Propostas
-![Geração de Propostas](imagens/gerar_proposta.png)
+![Geração de Propostas](images/gerar_proposta.png)
 
 ### Alterar Vendedores
-![Alterar Vendedores](imagens/alterar_vendedor.png)
+![Alterar Vendedores](images/alterar_vendedor.png)
 
 ### Calculadora para Vendedores
-![Calculadora para Vendedores](imagens/calculadora.png)
+![Calculadora para Vendedores](images/calculadora.png)
 
 ### Alterar Calculadora
-![Alterar Calculadora](imagens/alterar_calculadora.png)
+![Alterar Calculadora](images/alterar_calculadora.png)
 
 ### Cadastrar Vendedor
-![Cadastrar Vendedor](imagens/cadastrar_vendedor.png)
+![Cadastrar Vendedor](images/cadastrar_vendedor.png)
 
 
 
