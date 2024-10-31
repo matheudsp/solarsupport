@@ -4,6 +4,31 @@
 
 O Solar Support é um sistema completo com backend e frontend, que inclui uma calculadora para simular o preço de sistemas solares. A simulação é baseada na comissão do vendedor, custo por kWh e geração de arquivos de proposta.
 
+## PrintScreens
+
+### Tela de Login
+![Tela de Login](./imagens/login.png)
+
+### Listagem de Vendedores
+![Listagem de Vendedores](./imagens/lista-vendedores.png)
+
+### Geração de Propostas
+![Geração de Propostas](./imagens/gerar_proposta.png)
+
+### Alterar Vendedores
+![Alterar Vendedores](./imagens/alterar_vendedor.png)
+
+### Calculadora para Vendedores
+![Calculadora para Vendedores](./imagens/calculadora.png)
+
+### Alterar Calculadora
+![Alterar Calculadora](./imagens/alterar_calculadora.png)
+
+### Cadastrar Vendedor
+![Cadastrar Vendedor](./imagens/cadastrar_vendedor.png)
+
+
+
 ## Funcionalidades
 
 - **Simulação de Preços**: Calcule o preço de sistemas solares com base em variáveis configuráveis.
